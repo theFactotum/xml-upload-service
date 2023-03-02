@@ -48,3 +48,9 @@ Class | Method                                           | HTTP request      | D
 *XmlDataUploadController* | [**getAll**](http://localhost:8080/api/getAll)   | **GET** /getAll   | Get all the records from in-memory h2 Store
 *XmlDataUploadController* | [**save**](http://localhost:8080/api/save)       | **POST** /save    | save the DecideInfo record into database  without XSD validation (JSON Request)
 *XmlDataUploadController* | [**saveXML**](http://localhost:8080/api/saveXML) | **POST** /saveXML | Save the DeviceInfo Record into database post XSD schema validation (XML Request)
+
+
+**Help for Developer:**
+XSD is Generated using XML and store at /schema/ePaperRequest.xsd
+in memory json is loaded and stored temporary at /schema/input.xml
+Post XSD validation, the data is inserted into H2 in memory DB and response + inserted data in json format returned to caller
