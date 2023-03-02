@@ -1,12 +1,8 @@
 package com.task.model.xmlpojo;
 
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAttribute;
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class DeviceInfoBean {
@@ -33,13 +29,13 @@ public class DeviceInfoBean {
     public String getName() { 
 		return name;
 	} 
-  public void setTextContent(String textContent) { 
+  public void setTextContent(String textContent) {
 		this.textContent=textContent;
-	} 
+	}
     @XmlAttribute(name = "TextContent")
-    public String getTextContent() { 
+    public String getTextContent() {
 		return textContent;
-	} 
+	}
     @XmlElement(name = "screenInfo")
     public ScreenInfoBean getScreenInfoBean() { 
 		if(screenInfoBean==null) screenInfoBean=new ScreenInfoBean(); 

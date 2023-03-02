@@ -5,7 +5,7 @@ services:
     build:
       context: docker-xml-upload-service
       dockerfile: Dockerfile
-    image: xml-upload-service:latest
+    image: xml-upload-service-0.0.1:latest
     ports:
       - 8080:8080
     networks:
@@ -13,4 +13,4 @@ services:
 
 networks:
   my-task-network:
-    driver: bridge
+    external: true

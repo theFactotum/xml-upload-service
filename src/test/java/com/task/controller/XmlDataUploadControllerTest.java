@@ -3,20 +3,16 @@ package com.task.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.task.model.DeviceInfoModel;
-import com.task.service.IXmlDataUploadService;
 import com.task.service.impl.XmlDataUploadServiceImpl;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -38,22 +34,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @MockBean
     private XmlDataUploadServiceImpl xmlDataUploadService;
 
-    @Before
-    public void setUp() {
-
-    }
-
+    @DisplayName("JUnit test for get all DeviceModel Info method")
     @Test
     void testGetData() throws Exception {
 
         List<DeviceInfoModel> deviceInfoList = new ArrayList<>();
 
-        DeviceInfoModel deviceInfo = new DeviceInfoModel();
-        deviceInfo.setName("device1");
-        deviceInfo.setScreen_height("200");
-        deviceInfo.setScreen_width("300");
-        deviceInfo.setScreen_dpi("45");
-        deviceInfo.setScreen_newspapername("abac");
+        DeviceInfoModel deviceInfo = DeviceInfoModel.builder().name("device1")
+                .screen_height("200")
+                .screen_width("300")
+                .screen_dpi("45")
+                .screen_newspapername("abac").build();
 
         deviceInfoList.add(deviceInfo);
         when(xmlDataUploadService.getAll()).thenReturn(deviceInfoList);
@@ -67,12 +58,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void testSaveData() throws Exception {
 
-        DeviceInfoModel deviceInfo = new DeviceInfoModel();
-        deviceInfo.setName("device1");
-        deviceInfo.setScreen_height("200");
-        deviceInfo.setScreen_width("300");
-        deviceInfo.setScreen_dpi("45");
-        deviceInfo.setScreen_newspapername("abac");
+        DeviceInfoModel deviceInfo = DeviceInfoModel.builder().name("device1")
+                .screen_height("200")
+                .screen_width("300")
+                .screen_dpi("45")
+                .screen_newspapername("abac").build();
 
         when(xmlDataUploadService.saveData(deviceInfo)).thenReturn(deviceInfo);
 
@@ -83,13 +73,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     }
 
-    @Test
-    void testSaveXMLDataInStore() {
-    }
-
-    public static String asJsonString(final Object obj)
+    private static String asJsonString(final Object obj)
             throws JsonProcessingException {
-
         return new ObjectMapper().writeValueAsString(obj);
 
     }
