@@ -78,7 +78,7 @@ class XmlDataUploadServiceImplTest {
             .screen_newspapername("abac").build();
 
         Mockito.when(deviceRepository.save(any())).thenReturn(deviceInfo);
-        EpaperRequestBean result = xmlDataUploadService.saveXML(buildXMLBeans(),"");
+        EpaperRequestBean result = xmlDataUploadService.saveXML(buildXMLBeans());
 
     }
 
