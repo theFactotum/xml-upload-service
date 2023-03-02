@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "f1003e2a-e1c2-43b6-8057-69afaf4c433d",
+		"name": "xml-upload-service-requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all DeviceInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/getAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save DeviceInfo Json Request only",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Browser\",\r\n    \"screen_width\": \"1300\",\r\n    \"screen_height\": \"777\",\r\n    \"screen_dpi\": \"210\",\r\n    \"screen_newspapername\": \"Rakesh Maurya\",\r\n    \"filename\": \"C://Rakesh_MauryaDrive/tem/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save DeviceInfo from XML body with XSD validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<epaperRequest>\r\n<deviceInfo name=\"Browser\" id=\"test@comp\">\r\n<screenInfo width=\"1280\" height=\"752\" dpi=\"160\" />\r\n<osInfo name=\"Browser\" version=\"1.0\" />\r\n<appInfo>\r\n<newspaperName>rakeshhaaa88</newspaperName>\r\n<version>1.0</version>\r\n</appInfo>\r\n</deviceInfo>\r\n<getPages editionDefId=\"11\" publicationDate=\"2017-06-06\" />\r\n</epaperRequest>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/saveXML",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"saveXML"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
