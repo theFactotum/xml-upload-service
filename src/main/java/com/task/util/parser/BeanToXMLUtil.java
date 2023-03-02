@@ -1,6 +1,8 @@
 package com.task.util.parser;
 
 import com.task.model.xmlpojo.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -9,7 +11,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 
+
 public class BeanToXMLUtil {
+
+    public static Logger logger = LoggerFactory.getLogger(BeanToXMLUtil.class);
+
     public static Document convertBeanToXML(EpaperRequestBean epaperRequestBean) throws Exception {
         Document inputDoc = XMLUtil.createDocument("epaperRequest");
         Element epaperRequestElm = inputDoc.getDocumentElement();
