@@ -24,9 +24,9 @@ docker run -p8080:8080 xml-upload-service-0.0.1:latest
 <br/>
 
 Few Docker commands,
-$> docker inspect xml-upload-service <br>
-$> docker stop xml-upload-service <br>
-$> docker rm xml-upload-service <br>
+$> docker inspect xml-upload-service-0.0.1 <br>
+$> docker stop xml-upload-service-0.0.1 <br>
+$> docker rm xml-upload-service-0.0.1 <br>
 
 * Database connection url:
 
