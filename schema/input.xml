@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <epaperRequestBean TextContent="">
-    <deviceInfo id="test@comp" name="Browser" TextContent="">
-        <appInfo newspaperName="rakeshhaaa88" TextContent="" version="1.0"/>
-        <osInfo name="Browser" TextContent="" version="1.0"/>
-        <screenInfo dpi="160" height="752" TextContent="" width="1280"/>
+    <deviceInfo id="id1" name="device2" TextContent="">
+        <appInfo newspaperName="abc" TextContent="" version="1.0"/>
+        <osInfo name="" TextContent="" version="1.0"/>
+        <screenInfo dpi="123" height="800" TextContent="" width="450"/>
     </deviceInfo>
     <getPages editionDefId="11" publicationDate="2017-06-06" TextContent=""/>
 </epaperRequestBean>

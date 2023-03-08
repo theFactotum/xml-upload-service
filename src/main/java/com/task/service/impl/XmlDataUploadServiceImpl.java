@@ -24,6 +24,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -42,39 +44,25 @@ public class XmlDataUploadServiceImpl implements IXmlDataUploadService {
     @Override
     public Optional<DeviceInfoModel> getDeviceInfoById(DeviceInfoModel deviceInfoModel) {
 
-        Optional<DeviceInfoModel> savedDeviceInfo = uploadRepository.findById(deviceInfoModel.getId());
-        if(savedDeviceInfo.isEmpty()){
-            throw new RecordNotFoundException("DeviceInfo Record Not Found: " +deviceInfoModel.getId());
-        }
-        return savedDeviceInfo;
+        // use orElse Throw
+        return Optional.ofNullable(uploadRepository.findById(deviceInfoModel.getId()))
+                .orElseThrow(RecordNotFoundException::new);
     }
 
     @Override
     public List<DeviceInfoModel> getAll() {
-        List<DeviceInfoModel> xmlDataModelList = new ArrayList<>();
-        uploadRepository.findAll().forEach(xmlDataModelList::add);
-
-        logger.debug("Total records fetched from database successfully : "+xmlDataModelList.size());
-
-        return xmlDataModelList;
+        return StreamSupport.stream(uploadRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
+
     @Override
     public DeviceInfoModel saveData(DeviceInfoModel deviceInfoModel) {
 
         deviceInfoModel.setUploadtime(LocalDateTime.now(ZoneId.systemDefault()));
-        try {
-            Optional<DeviceInfoModel> savedDeviceInfo = uploadRepository.findById(deviceInfoModel.getId());
-            if(savedDeviceInfo.isPresent()){
-                throw new RecordAlreadyExistException("DeviceInfo Record already Found: " +deviceInfoModel.getId());
-            } else
+
             uploadRepository.save(deviceInfoModel);
             logger.debug("New Record saved into Database successfully at : "+deviceInfoModel.getUploadtime());
+           return deviceInfoModel;
 
-            return deviceInfoModel;
-        } catch (Exception e) {
-            logger.error("Insert Operation Failed");
-            throw new OperationFailedException("Insert Operation Failed");
-        }
     }
 
     @Override
@@ -82,6 +70,7 @@ public class XmlDataUploadServiceImpl implements IXmlDataUploadService {
 
         BeanToXMLUtil.saveToFile(XML_FILE_NAME, requestBean);
 
+        // should be more functional
         if(XMLValidator.validateXMLSchema(XSD_FILE_NAME,XML_FILE_NAME)) {
             saveData(XMLHelper.transformXML(requestBean, XML_FILE_NAME));
             logger.debug("XML Record has been uploaded successfully");

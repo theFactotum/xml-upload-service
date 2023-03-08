@@ -2,7 +2,6 @@ package com.task.service;
 
 import com.task.model.DeviceInfoModel;
 import com.task.model.xmlpojo.EpaperRequestBean;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
